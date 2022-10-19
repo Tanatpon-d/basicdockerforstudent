@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  food-api:
+    build: .
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app/:/code/
+    environment: 
+      FLASK_DEBUG: 1
