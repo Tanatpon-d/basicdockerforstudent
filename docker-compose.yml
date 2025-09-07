@@ -1,11 +1,23 @@
 version: "3.9"
+
 services:
-  food-api:
-    build: .
-    restart: always
+  flask-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-docker-tutorial
+    restart: unless-stopped
     ports:
       - "5000:5000"
     volumes:
-      - ./app/:/code/
+      - ./app:/code/app
     environment: 
       FLASK_DEBUG: 1
+      FLASK_APP: app/app.py
+      FLASK_ENV: development
+    networks:
+      - docker-tutorial-net
+
+networks:
+  docker-tutorial-net:
+    driver: bridge
